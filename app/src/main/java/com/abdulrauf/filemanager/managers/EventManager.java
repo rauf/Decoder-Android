@@ -15,6 +15,8 @@ import android.support.v4.content.FileProvider;
 import android.webkit.MimeTypeMap;
 import android.widget.Toast;
 
+import com.abdulrauf.filemanager.activities.MainActivity;
+import com.abdulrauf.filemanager.activities.MediaActivity;
 import com.abdulrauf.filemanager.adapters.DisplayFragmentAdapter;
 import com.abdulrauf.filemanager.fragments.DisplayFragment;
 
@@ -29,7 +31,6 @@ import java.util.Arrays;
  * Created by abdul on 5/1/16.
  */
 public class EventManager {
-
 
     public static final String SORT_ORDER_ASC = "ASC";
     public static final String SORT_ORDER_DESC = "DESC";
@@ -82,19 +83,27 @@ public class EventManager {
 
         if(file.isFile()) {
 
-            MimeTypeMap mime = MimeTypeMap.getSingleton();
-            Intent i = new Intent();
-            i.setAction(Intent.ACTION_VIEW);
-            String mimeType = mime.getMimeTypeFromExtension(fileManager.getExtension(file.getAbsolutePath()).substring(1));
-            i.setDataAndType(Uri.fromFile(file), mimeType);
-            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-            try {
-                context.startActivity(i);
-            } catch (ActivityNotFoundException e) {
-                Toast.makeText(context, "No handler for this type of file.", Toast.LENGTH_LONG).show();
+            if (fileManager.getExtension(file.getAbsolutePath()).equals(".mp4")) {
+                Intent intent = new Intent(context, MediaActivity.class);
+                intent.putExtra("SOURCE_PATH", file.getAbsolutePath());
+                context.startActivity(intent);
             }
 
+            else {
+                MimeTypeMap mime = MimeTypeMap.getSingleton();
+                Intent i = new Intent();
+                i.setAction(Intent.ACTION_VIEW);
+                String mimeType = mime.getMimeTypeFromExtension(fileManager.getExtension(file.getAbsolutePath()).substring(1));
+                i.setDataAndType(Uri.fromFile(file), mimeType);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                try {
+                    context.startActivity(i);
+                } catch (ActivityNotFoundException e) {
+                    Toast.makeText(context, "No handler for this type of file.", Toast.LENGTH_LONG).show();
+                }
+            }
         }
 
         else if(file.isDirectory()) {

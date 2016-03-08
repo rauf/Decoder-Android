@@ -20,7 +20,7 @@ import java.util.Stack;
 public class FileManager {
 
 
-    private Stack<File> pathStack;
+    public Stack<File> pathStack;
     private boolean showHiddenFiles;
     private String sortOrder;
     private String sortBy;

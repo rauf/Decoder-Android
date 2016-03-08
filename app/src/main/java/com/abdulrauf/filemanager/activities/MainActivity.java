@@ -48,8 +48,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.drawer);
-
+        setContentView(R.layout.activity_main);
 
         requestForPermission();
 
@@ -90,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+
         drawerListView = (ListView) findViewById(R.id.drawerListView);
 
         toggle = new ActionBarDrawerToggle(MainActivity.this,
@@ -98,8 +98,9 @@ public class MainActivity extends AppCompatActivity {
                 R.string.open,
                 R.string.cancel);
 
-        drawerLayout.setDrawerListener(toggle);
-        toggle.syncState();
+//        drawerLayout.setDrawerListener(toggle);
+   //     toggle.syncState();
+
     }
 
     private void requestForPermission() {
@@ -143,10 +144,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
+/*
+
         if(drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawers();
             return;
         }
+*/
+
 
         int count = EventManager
                 .getInstance()

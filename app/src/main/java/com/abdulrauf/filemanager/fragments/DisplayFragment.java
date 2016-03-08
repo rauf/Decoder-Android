@@ -247,9 +247,10 @@ public class DisplayFragment extends Fragment  {
         @Override
         public void onShareButtonClicked(int position) {
 
-            ArrayList<File> files = new ArrayList<File>();
+            ArrayList<File> files = new ArrayList<>();
             files.add(filesAndFolders.get(position));
             EventManager.getInstance().share(files);
+            Toast.makeText(getActivity(), "Share partially implemented", Toast.LENGTH_SHORT).show();
             longPressDialog.dismiss();
         }
 
